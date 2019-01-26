@@ -3,14 +3,33 @@
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!--
+		1、mybatis可以使用properties来引入外部properties配置文件的内容；
+		resource: 引入类路径下的资源(com/mybatis/db/dbconf.properties)
+		url: 引入网络路径或者磁盘路径下的资源
+	  -->
+	<properties resource="dbconf.properties"></properties>
+	
+	<!-- 
+		2、settings包含很多重要的设置项
+		setting:用来设置每一个设置项
+			name：设置项名
+			value：设置项取值
+		注 : 要使用具体的某项设置可以查询官方文档
+	 -->
+	<settings>
+		<!-- 下划线变成驼峰 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>	
+	</settings>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost:3306/mybatais?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=UTC" />
-				<property name="username" value="root" />
-				<property name="password" value="123456" />
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
 			</dataSource>
 		</environment>
 	</environments>

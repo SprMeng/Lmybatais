@@ -16,6 +16,6 @@
 		select id, last_name as lastName, email, gender from tbl_employee where id = #{id}
 	</select> -->
 	<select id="getById" resultType="com.mybatis.bean.Employee">
-		select id, last_name as lastName, email, gender from tbl_employee where id = #{id}
+		select * from tbl_employee where id = #{id}
 	</select>
 </mapper>
