@@ -22,6 +22,20 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>	
 	</settings>
 	
+	<!-- typeAliases : 别名处理器 : 可以为java类型起别名; 注 : 别名不区分大小写 -->
+	<typeAliases>
+		<!-- type: 为某个类起别名; 默认别名 就是employee
+			alias : 指定新别名
+		-->
+		<!-- <typeAlias type="com.mybatis.bean.Employee" alias="Employee"/> -->
+		<!-- package : 为某个包下的类批量起别名 
+			name : 指定包名(为当前包和后代包下所有的类都起一个默认别名)
+		-->
+		<package name="com.mybatis.bean"/> 
+		<!-- 批量起别名的情况下,使用 @Alias注释为某个类型指定新的别名 -->
+		
+	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
