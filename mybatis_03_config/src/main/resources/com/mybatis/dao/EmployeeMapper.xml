@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="com.mybatis.EmployeeMapper"> -->
+<mapper namespace="com.mybatis.dao.EmployeeMapper">
+<!-- 
+	namespace : 名称空间
+	id : 唯一标识
+	resultType : 返回值类型
+	#{id} : 从传递过来的参数中获取id值
+	
+	public Employee getById(Integer id);
+ -->
+	<!-- <select id="selectEmp" resultType="com.mybatis.bean.Employee">
+		select id, last_name as lastName, email, gender from tbl_employee where id = #{id}
+	</select> -->
+	<select id="getById" resultType="emp">
+		select * from tbl_employee where id = #{id}
+	</select>
+	<!-- 在有 databaseId 标记下, 相同id但无databaseId标记的sql会被舍弃 -->
+	<select id="getById" resultType="emp"
+		databaseId="mysql">
+		select * from tbl_employee where id = #{id}
+	</select>
+	<select id="getById" resultType="emp"
+		databaseId="oracle">
+		select EMPLOYEE_ID id,LAST_NAME	lastName,EMAIL email 
+		from employees where EMPLOYEE_ID=#{id}
+	</select>
+</mapper>
