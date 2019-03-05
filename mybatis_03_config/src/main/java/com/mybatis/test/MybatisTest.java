@@ -99,4 +99,30 @@ public class MybatisTest {
 		}
 		
 	}
+	
+	@Test
+	public void testCUD() throws Exception {
+		String source = "mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(source);
+		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		//1、获取到的SqlSession不会自动提交数据
+		SqlSession sqlSession = sessionFactory.openSession();
+		
+		try {
+			EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+			//测试添加
+//			Employee employee = new Employee(null, "kitty", "kitty@gmall.com", 0);
+//			mapper.addEmp(employee);
+			//测试修改
+//			Employee employee = new Employee(3, "kitty2", "kitty@gmall.com2", 0);
+//			mapper.updateEmp(employee);
+			//测试删除
+			mapper.deleteEmp(3);
+			//2、手动提交数据
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
 }

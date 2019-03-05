@@ -5,15 +5,26 @@ import org.apache.ibatis.type.Alias;
 @Alias("emp")
 public class Employee {
 
-	private int id;
+	private Integer id;
 	private String lastName;
 	private String email;
-	private int gender;
+	private Integer gender;
 	
-	public int getId() {
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Employee(Integer id, String lastName, String email, Integer gender) {
+		this.id = id;
+		this.lastName = lastName;
+		this.email = email;
+		this.gender = gender;
+	}
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getLastName() {
@@ -28,10 +39,10 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getGender() {
+	public Integer getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 	@Override
