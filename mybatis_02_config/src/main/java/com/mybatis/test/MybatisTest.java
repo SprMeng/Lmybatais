@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import com.mybatis.bean.Employee;
 import com.mybatis.dao.EmployeeMapper;
+import com.mybatis.dao.EmployeeMapperAnnotation;
 
 /**
  * 1、接口式编程
@@ -81,5 +82,21 @@ public class MybatisTest {
 		} finally {
 			sqlSession.close();
 		}
+	}
+	
+	@Test
+	public void test03() throws Exception {
+		String source = "mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(source);
+		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		SqlSession sqlSession = sessionFactory.openSession();
+		
+		try {
+			EmployeeMapperAnnotation annotation = sqlSession.getMapper(EmployeeMapperAnnotation.class);
+			System.out.println(annotation.getById(1));
+		} finally {
+			sqlSession.close();
+		}
+		
 	}
 }
