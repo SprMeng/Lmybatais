@@ -9,6 +9,7 @@ public class Employee {
 	private String lastName;
 	private String email;
 	private Integer gender;
+	private Dept dept;
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
@@ -47,6 +48,15 @@ public class Employee {
 	}
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + "]";
+		return "Employee [id=" + id + ", lastName=" + lastName + ", email=" + email + ", gender=" + gender + ", dept="
+				+ dept + "]";
+	}
+
+	public Dept getDept() {
+		return dept;
+	}
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
 	}
 }
