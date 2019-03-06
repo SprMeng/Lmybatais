@@ -1,6 +1,8 @@
 package com.mybatis.test;
 
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -16,6 +18,7 @@ import org.junit.Test;
 import com.mybatis.bean.Employee;
 import com.mybatis.dao.EmployeeMapper;
 import com.mybatis.dao.EmployeeMapperAnnotation;
+import com.mybatis.dao.EmployeeMapperPlus;
 
 /**
  * 1、接口式编程
@@ -174,5 +177,19 @@ public class MybatisTest {
 			sqlSession.close();
 		}
 		
+	}
+	
+	@Test
+	public void test05() throws Exception {
+		String source = "mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(source);
+		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		SqlSession sqlSession = sessionFactory.openSession();
+		try {
+			EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
+			System.out.println(mapper.getEmpById(1));
+		} finally {
+			sqlSession.close();
+		}
 	}
 }
