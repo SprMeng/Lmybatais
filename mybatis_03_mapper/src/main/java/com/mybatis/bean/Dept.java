@@ -3,21 +3,22 @@ package com.mybatis.bean;
 public class Dept {
 	
 	private Integer id;
-	private String dept_name;
+	private String deptName;
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getDept_name() {
-		return dept_name;
-	}
-	public void setDept_name(String dept_name) {
-		this.dept_name = dept_name;
-	}
+	
 	@Override
 	public String toString() {
-		return "Dept [id=" + id + ", dept_name=" + dept_name + "]";
+		return "Dept [id=" + id + ", deptName=" + deptName + "]";
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 }

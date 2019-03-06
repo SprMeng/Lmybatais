@@ -1,12 +1,8 @@
 package com.mybatis.test;
 
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -189,7 +185,9 @@ public class MybatisTest {
 			EmployeeMapperPlus mapper = sqlSession.getMapper(EmployeeMapperPlus.class);
 //			System.out.println(mapper.getEmpById(1));
 			
-			System.out.println(mapper.getEmpAndDept(1));
+			//System.out.println(mapper.getEmpAndDept(1));
+			
+			System.out.println(mapper.getDeptByIdStep(1));
 		} finally {
 			sqlSession.close();
 		}
