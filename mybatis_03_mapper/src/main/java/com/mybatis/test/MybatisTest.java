@@ -4,6 +4,7 @@ package com.mybatis.test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -152,12 +153,23 @@ public class MybatisTest {
 		
 		try {
 			EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-			Employee employee = mapper.getEmpByIdAndLastName(1, "freeman");
+//			Employee employee = mapper.getEmpByIdAndLastName(1, "freeman");
+			
 //			Map<String, Object> map = new HashMap<>();
 //			map.put("id", 1);
 //			map.put("lastName", "freeman");
+//			map.put("tableName", "tbl_employee");
 //			Employee employee = mapper.getEmpByMap(map);
-			System.out.println(employee);
+//			System.out.println(employee);
+			
+//			List<Employee> like = mapper.getEmpsByLastNameLike("%k%");
+//			System.out.println(like);
+			
+//			Map<String, Object> map = mapper.getEmpByIdReturnMap(1);
+//			System.out.println(map);
+			
+			Map<String, Employee> map = mapper.getEmpsByLastNameLikeReturnMap("%k%");
+			System.out.println(map);
 		} finally {
 			sqlSession.close();
 		}
