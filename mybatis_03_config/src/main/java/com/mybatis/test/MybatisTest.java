@@ -3,6 +3,8 @@ package com.mybatis.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -100,6 +102,16 @@ public class MybatisTest {
 		
 	}
 	
+	
+	/**
+	 * 测试增删改
+	 * 1、mybatis允许增删改直接定义以下类型返回值
+	 * 		Integer、Long、Boolean、void
+	 * 2、我们需要手动提交数据
+	 * 		sqlSessionFactory.openSession();===》手动提交
+	 * 		sqlSessionFactory.openSession(true);===》自动提交
+	 * @throws IOException 
+	 */
 	@Test
 	public void testCUD() throws Exception {
 		String source = "mybatis-config.xml";
@@ -111,15 +123,41 @@ public class MybatisTest {
 		try {
 			EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
 			//测试添加
-//			Employee employee = new Employee(null, "kitty", "kitty@gmall.com", 0);
-//			mapper.addEmp(employee);
+			Employee employee = new Employee(null, "kitty", "kitty@gmall.com", 0);
+			mapper.addEmp(employee);
+			System.out.println(employee.getId());
+			
 			//测试修改
-//			Employee employee = new Employee(3, "kitty2", "kitty@gmall.com2", 0);
-//			mapper.updateEmp(employee);
+//			Employee emp = new Employee(4, "kitty2", "kitty@gmall.com2", 0);
+//			boolean flag = mapper.updateEmp(emp);
+//			System.out.println(flag);
+			
 			//测试删除
-			mapper.deleteEmp(3);
+			//mapper.deleteEmp(3);
 			//2、手动提交数据
 			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+		
+	}
+	
+	@Test
+	public void test04() throws Exception {
+		String source = "mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(source);
+		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		//1、获取到的SqlSession不会自动提交数据
+		SqlSession sqlSession = sessionFactory.openSession();
+		
+		try {
+			EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+			Employee employee = mapper.getEmpByIdAndLastName(1, "freeman");
+//			Map<String, Object> map = new HashMap<>();
+//			map.put("id", 1);
+//			map.put("lastName", "freeman");
+//			Employee employee = mapper.getEmpByMap(map);
+			System.out.println(employee);
 		} finally {
 			sqlSession.close();
 		}
