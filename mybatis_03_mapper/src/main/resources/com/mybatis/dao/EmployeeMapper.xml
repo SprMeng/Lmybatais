@@ -36,7 +36,7 @@
 	</select>
 	
 	<!-- public Map<String, Employee> getEmpsByLastNameLikeReturnMap(String lastName); -->
-	<select id="getEmpsByLastNameLikeReturnMap" resultType="map">
+	<select id="getEmpsByLastNameLikeReturnMap" resultType="emp">
 		select * from tbl_employee where last_name like #{lastName}
 	</select>
 	
