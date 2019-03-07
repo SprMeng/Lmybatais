@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 
+import com.mybatis.bean.Dept;
 import com.mybatis.bean.Employee;
+import com.mybatis.dao.DepartmentMapper;
 import com.mybatis.dao.EmployeeMapper;
 import com.mybatis.dao.EmployeeMapperAnnotation;
 import com.mybatis.dao.EmployeeMapperPlus;
@@ -190,6 +192,24 @@ public class MybatisTest {
 			Employee employee = mapper.getDeptByIdStep(1);
 			System.out.println(employee.getLastName());
 			System.out.println(employee.getDept());
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void test06() throws Exception {
+		String source = "mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(source);
+		SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+		SqlSession sqlSession = sessionFactory.openSession();
+		try {
+			
+			DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
+			Dept dept = mapper.getDeptByIdPlus(1);
+			System.out.println(dept);
+			System.out.println(dept.getEmployees());
+			
 		} finally {
 			sqlSession.close();
 		}

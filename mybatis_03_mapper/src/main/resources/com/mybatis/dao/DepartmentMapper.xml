@@ -8,5 +8,44 @@
 		select id, dept_name deptName from dept where id=#{id}
 	</select>
 	
+	<!-- 
+	private Integer id;
+	private String deptName;
+	
+	private List<Employee> employees;
+	 -->
+	 
+	<!--嵌套结果集的方式，使用collection标签定义关联的集合类型的属性封装规则  -->
+	<resultMap type="com.mybatis.bean.Dept" id="MyDept">
+		<id property="id" column="did" />
+		<result property="deptName" column="dept_name" />
+		<!-- 
+			collection定义关联集合类型的属性的封装规则 
+			ofType:指定集合里面元素的类型
+		-->
+		<collection property="employees" ofType="com.mybatis.bean.Employee">
+			<id property="id" column="eid" />
+			<result property="lastName" column="last_name" />
+			<result property="email" column="email" />
+			<result property="gender" column="gender" />
+
+		</collection>	
+	</resultMap>
+	<!-- public Department getDeptByIdPlus(Integer id); -->
+	<select id="getDeptByIdPlus" resultMap="MyDept">
+		SELECT
+			d.id did,
+			dept_name,
+			e.id eid,
+			last_name,
+			gender,
+			email
+		FROM
+			dept d
+		LEFT JOIN tbl_employee e ON d.id = e.d_id
+		WHERE
+			d.id = #{id};
+	</select>
+	
 	
 </mapper>
