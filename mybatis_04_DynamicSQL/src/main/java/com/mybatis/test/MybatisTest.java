@@ -60,6 +60,10 @@ public class MybatisTest {
 			//2、mybatis使用where标签来将所有的查询条件包括在内。mybatis就会将where标签中拼装的sql，多出来的and或者or去掉
 				//where只会去掉第一个多出来的and或者or。
 			
+			List<Employee> results = mapperDynamicSQL.getEmpsByConditionTrim(employee);
+			for (Employee result : results) {
+				System.out.println(result);
+			}
 			
 		} finally {
 			sqlSession.close();

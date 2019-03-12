@@ -39,5 +39,38 @@
 		 	</if>
 	 	</where>
 	 </select>
+	 
+	 <!--public List<Employee> getEmpsByConditionTrim(Employee employee);  -->
+	 <select id="getEmpsByConditionTrim" resultType="com.mybatis.bean.Employee">
+	 	select * from tbl_employee
+	 	<!-- 后面多出的and或者or where标签不能解决 
+	 	prefix="":前缀：trim标签体中是整个字符串拼串 后的结果。
+	 			prefix给拼串后的整个字符串加一个前缀 
+	 	prefixOverrides="":
+	 			前缀覆盖： 去掉整个字符串前面多余的字符
+	 	suffix="":后缀
+	 			suffix给拼串后的整个字符串加一个后缀 
+	 	suffixOverrides=""
+	 			后缀覆盖：去掉整个字符串后面多余的字符
+	 			
+	 	-->
+	 	<!-- 自定义字符串的截取规则 -->
+	 	<trim prefix="where" suffixOverrides="and">
+	 		<if test="id!=null">
+		 		id=#{id} and
+		 	</if>
+		 	<if test="lastName!=null &amp;&amp; lastName!=&quot;&quot;">
+		 		last_name like #{lastName} and
+		 	</if>
+		 	<if test="email!=null and email.trim()!=&quot;&quot;">
+		 		email=#{email} and
+		 	</if> 
+		 	<!-- ognl会进行字符串与数字的转换判断  "0"==0 -->
+		 	<if test="gender==0 or gender==1">
+		 	 	gender=#{gender}
+		 	</if>
+		 </trim>
+	 </select>
+	 
 
 </mapper>
