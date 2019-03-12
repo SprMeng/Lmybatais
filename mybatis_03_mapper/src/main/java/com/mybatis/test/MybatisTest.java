@@ -206,10 +206,14 @@ public class MybatisTest {
 		try {
 			
 			DepartmentMapper mapper = sqlSession.getMapper(DepartmentMapper.class);
-			Dept dept = mapper.getDeptByIdPlus(1);
-			System.out.println(dept);
-			System.out.println(dept.getEmployees());
+//			Dept dept = mapper.getDeptByIdPlus(1);
+//			System.out.println(dept);
+//			System.out.println(dept.getEmployees());
+//			System.out.println(dept.getEmployees().get(0).getDept());
 			
+			Dept dept = mapper.getDeptByIdStep(1);
+			System.out.println(dept.getDeptName());
+			System.out.println(dept.getEmployees());
 		} finally {
 			sqlSession.close();
 		}

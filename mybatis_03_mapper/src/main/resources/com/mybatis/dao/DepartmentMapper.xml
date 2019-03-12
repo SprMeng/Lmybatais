@@ -28,7 +28,7 @@
 			<result property="lastName" column="last_name" />
 			<result property="email" column="email" />
 			<result property="gender" column="gender" />
-
+			<association property="dept" resultMap="MyDept"></association>
 		</collection>	
 	</resultMap>
 	<!-- public Department getDeptByIdPlus(Integer id); -->
@@ -47,5 +47,19 @@
 			d.id = #{id};
 	</select>
 	
+	<!-- collection：分段查询 -->
+	<resultMap type="com.mybatis.bean.Dept" id="MyDeptStep">
+		<id property="id" column="id" />
+		<result property="deptName" column="dept_name" />
+		<collection property="employees" select="com.mybatis.dao.EmployeeMapperPlus.getEmpsByDeptId" column="id">
+
+		</collection>	
+	</resultMap>
+	
+	 
+	<!-- public List<Employee> getEmpsByDeptId(Integer deptId); -->
+	<select id="getDeptByIdStep" resultMap="MyDeptStep">
+		SELECT * FROM dept WHERE id = #{id};
+	</select>
 	
 </mapper>
