@@ -105,7 +105,7 @@
 	 -->
 	<!-- public List<Employee> getEmpsByDeptId(Integer id); -->
 	<select id="getEmpsByDeptId"  resultType="com.mybatis.bean.Employee">
-		select * from tbl_employee where d_id=#{id}
+		select * from tbl_employee where d_id=#{deptid}
 	</select>
 	
 </mapper>

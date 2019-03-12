@@ -51,7 +51,8 @@
 	<resultMap type="com.mybatis.bean.Dept" id="MyDeptStep">
 		<id property="id" column="id" />
 		<result property="deptName" column="dept_name" />
-		<collection property="employees" select="com.mybatis.dao.EmployeeMapperPlus.getEmpsByDeptId" column="id">
+		<collection property="employees" 
+		select="com.mybatis.dao.EmployeeMapperPlus.getEmpsByDeptId" column="{deptid=id}" fetchType="lazy">
 
 		</collection>	
 	</resultMap>
@@ -61,5 +62,13 @@
 	<select id="getDeptByIdStep" resultMap="MyDeptStep">
 		SELECT * FROM dept WHERE id = #{id};
 	</select>
+	
+	<!-- 扩展：多列的值传递过去：
+			将多列的值封装map传递；
+			column="{key1=column1,key2=column2}"
+		fetchType="lazy"：表示使用延迟加载；
+				- lazy：延迟
+				- eager：立即
+	 -->
 	
 </mapper>
