@@ -196,7 +196,8 @@
 	  
 	  <!--public List<Employee> getEmpsTestInnerParameter(Employee employee);  -->
 	  <select id="getEmpsTestInnerParameter" resultType="com.mybatis.bean.Employee">
-	  		
+	  		<!-- bind：可以将OGNL表达式的值绑定到一个变量中，方便后来引用这个变量的值 -->
+	  		<!-- <bind name="_lastName" value="'%'+lastName+'%'"/> -->
 	  		<if test="_databaseId=='mysql'">
 	  			select * from tbl_employee
 	  			<if test="_parameter!=null">
