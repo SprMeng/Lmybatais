@@ -182,4 +182,32 @@
 			select #{emp.lastName} lastName,#{emp.email} email from dual
 		</foreach>
 	 </insert> -->
+	 
+	 <!-- 两个内置参数：
+	 	不只是方法传递过来的参数可以被用来判断，取值。。。
+	 	mybatis默认还有两个内置参数：
+	 	_parameter:代表整个参数
+	 		单个参数：_parameter就是这个参数
+	 		多个参数：参数会被封装为一个map；_parameter就是代表这个map
+	 	
+	 	_databaseId:如果配置了databaseIdProvider标签。
+	 		_databaseId就是代表当前数据库的别名oracle
+	  -->
+	  
+	  <!--public List<Employee> getEmpsTestInnerParameter(Employee employee);  -->
+	  <select id="getEmpsTestInnerParameter" resultType="com.mybatis.bean.Employee">
+	  		
+	  		<if test="_databaseId=='mysql'">
+	  			select * from tbl_employee
+	  			<if test="_parameter!=null">
+	  				where last_name like #{lastName}
+	  			</if>
+	  		</if>
+	  		<if test="_databaseId=='oracle'">
+	  			select * from employees
+	  			<if test="_parameter!=null">
+	  				where last_name like #{_parameter.lastName}
+	  			</if>
+	  		</if>
+	  </select>
 </mapper>

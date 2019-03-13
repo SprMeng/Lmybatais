@@ -85,11 +85,15 @@ public class MybatisTest {
 //			}
 			
 			//测试批量插入
-			List<Employee> employees = new ArrayList<>();
-			employees.add(new Employee("alex", "alex@gmail.com", 1, new Dept(1, "")));
-			employees.add(new Employee("allen", "allen@gmail.com", 0, new Dept(2, "")));
-			mapperDynamicSQL.addEmps(employees);
-			sqlSession.commit();
+//			List<Employee> employees = new ArrayList<>();
+//			employees.add(new Employee("alex", "alex@gmail.com", 1, new Dept(1, "")));
+//			employees.add(new Employee("allen", "allen@gmail.com", 0, new Dept(2, "")));
+//			mapperDynamicSQL.addEmps(employees);
+//			sqlSession.commit();
+			
+			//测试两个内置参数
+			List<Employee> employees = mapperDynamicSQL.getEmpsTestInnerParameter(null);
+			System.out.println(employees);
 		} finally {
 			sqlSession.close();
 		}
