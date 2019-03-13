@@ -22,6 +22,14 @@ public class Employee {
 		this.gender = gender;
 	}
 	
+	public Employee(String lastName, String email, Integer gender, Dept dept) {
+		super();
+		this.lastName = lastName;
+		this.email = email;
+		this.gender = gender;
+		this.dept = dept;
+	}
+
 	public Integer getId() {
 		return id;
 	}

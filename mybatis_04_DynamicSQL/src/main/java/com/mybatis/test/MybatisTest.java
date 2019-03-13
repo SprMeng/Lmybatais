@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -78,10 +79,17 @@ public class MybatisTest {
 //			sqlSession.commit();
 			
 			//≤‚ ‘foreach
-			List<Employee> list = mapperDynamicSQL.getEmpsByConditionForeach(Arrays.asList(1, 4, 5));
-			for (Employee emp : list) {
-				System.out.println(emp);
-			}
+//			List<Employee> list = mapperDynamicSQL.getEmpsByConditionForeach(Arrays.asList(1, 4, 5));
+//			for (Employee emp : list) {
+//				System.out.println(emp);
+//			}
+			
+			//≤‚ ‘≈˙¡ø≤Â»Î
+			List<Employee> employees = new ArrayList<>();
+			employees.add(new Employee("alex", "alex@gmail.com", 1, new Dept(1, "")));
+			employees.add(new Employee("allen", "allen@gmail.com", 0, new Dept(2, "")));
+			mapperDynamicSQL.addEmps(employees);
+			sqlSession.commit();
 		} finally {
 			sqlSession.close();
 		}

@@ -16,6 +16,14 @@ public class Dept {
 		this.id = id;
 	}
 	
+	public Dept() {
+		super();
+	}
+	public Dept(Integer id, String deptName) {
+		super();
+		this.id = id;
+		this.deptName = deptName;
+	}
 	@Override
 	public String toString() {
 		return "Dept [id=" + id + ", deptName=" + deptName + "]";
