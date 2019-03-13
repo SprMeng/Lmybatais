@@ -162,4 +162,24 @@
 	 	</foreach>
 	 </insert> -->
 
+	<!-- <insert id="addEmps" databaseId="oracle">
+	 	oracle第一种批量方式
+	 	<foreach collection="emps" item="emp" open="begin" close="end;">
+	 		insert into employees(employee_id,last_name,email) 
+			    values(employees_seq.nextval,#{emp.lastName},#{emp.email});
+	 	</foreach>
+	 	
+	 	oracle第二种批量方式 
+	 	insert into employees(
+	 		引用外部定义的sql
+	 		<include refid="insertColumn">
+	 			<property name="testColomn" value="abc"/>
+	 		</include>
+	 	)
+		<foreach collection="emps" item="emp" separator="union"
+			open="select employees_seq.nextval,lastName,email from("
+			close=")">
+			select #{emp.lastName} lastName,#{emp.email} email from dual
+		</foreach>
+	 </insert> -->
 </mapper>
