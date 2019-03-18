@@ -1,10 +1,16 @@
 package com.mybatis.bean;
 
+import java.io.Serializable;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias("emp")
-public class Employee {
+public class Employee implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5840068302277133572L;
 	private Integer id;
 	private String lastName;
 	private String email;
